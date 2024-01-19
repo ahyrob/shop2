@@ -25,9 +25,9 @@ public class Item {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    /*@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "admin_item_id")*/
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "item")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "admin_item_id")
+    // @OneToOne(fetch = FetchType.LAZY, mappedBy = "item")
     private AdminItem adminItem;
 
     // 3.

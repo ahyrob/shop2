@@ -19,7 +19,7 @@ public class Admin {
 
     // 3.
     @OneToMany(mappedBy = "admin")
-    private List<AdminItem> adminItems = new ArrayList<>();
+    private List<AdminItem> adminItem = new ArrayList<>();
 
     @OneToMany(mappedBy = "admin")
     private List<Notice> notice = new ArrayList<>();

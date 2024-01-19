@@ -3,9 +3,10 @@ package clothes.shop.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Getter
+@Getter //@Setter
 public class Delivery {
 
     @Id
@@ -16,9 +17,9 @@ public class Delivery {
     @Embedded
     private Address address;
 
-    @Column(name = "delivery_status")
     @Enumerated(EnumType.STRING)
-    private DeliveryStatus deliveryStatus;
+    private DeliveryStatus status; // deliveryStatus를 staatus로 바꿨떠니 됨 왜?????????
+
     @OneToOne(mappedBy = "delivery")
     private Order order;
 

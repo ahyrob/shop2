@@ -21,9 +21,6 @@ public class AdminItem {
     private Admin admin;
 
     // 3.
-    /*
-    @OneToOne(mappedBy = "admin_item")
-*/
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private Item item;

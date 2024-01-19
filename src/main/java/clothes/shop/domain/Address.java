@@ -19,10 +19,10 @@ public class Address {
     private DeliveryStatus deliveryStatus;
 
 
-  /*  protected Address() {
+    protected Address() {
     }
 
-    public Address(String city, String street, String zipcode) {
+ /*   public Address(String city, String street, String zipcode) {
         this.city = city;
 
     }*/
