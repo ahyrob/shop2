@@ -3,6 +3,7 @@ package clothes.shop.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,16 +19,17 @@ public class Member {
 
     //@NotEmpty
     private String loginId; // 사용자 아이디
-    //@NotEmpty
-    private String name; // 사용자 이름
+    private String name;
     //@NotEmpty
     private String password;
     @Embedded
     private Address address;
     private String phone;
     private String email;
+
     @Enumerated(EnumType.STRING)
-    private MemberStatus memberStatus;
+    private UserStatus userStatus;
+
 
     // 3.
 

@@ -1,5 +1,5 @@
 package clothes.shop.domain;
 
-public enum MemberStatus {
+public enum UserStatus {
     MEMBER, NONMEMBER, ADMIN
 }
