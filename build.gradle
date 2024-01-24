@@ -24,6 +24,7 @@ repositories {
 }
 
 dependencies {
+	implementation group: 'org.springframework.boot', name: 'spring-boot-devtools' // 서버 재시작 없이
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -35,6 +36,9 @@ dependencies {
 	//testImplementation 'junit:junit:4.13' // junit 4로 변경
 	asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor' // (3)
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc' // (4)
+	implementation 'org.springframework.boot:spring-boot-starter-security' // security
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6' // security
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 }
 
 ext {

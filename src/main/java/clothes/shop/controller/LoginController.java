@@ -6,36 +6,44 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Slf4j
 @Controller
+@RequestMapping("/login")
 public class LoginController {
-    @RequestMapping("/login/login")
+    @RequestMapping("/login")
     public String login() {
         log.info("login controller");
         return "login/login";
     }
 
-    @RequestMapping("/login/id-finder")
+    @RequestMapping("/id-finder")
     public String idFinder() {
         log.info("id finder");
         return "login/id-finder";
-    }  @RequestMapping("/login/kakao-signup")
+    }  @RequestMapping("/kakao-signup")
     public String kakaoSignup() {
         log.info("kakao sign up");
         return "login/kakao-signup";
-    }  @RequestMapping("/login/order-inquiry-non-member")
-    public String orderInquiryNonMember() {
-        log.info("order inquiry nonmember");
-        return "login/order-inquiry-non-member";
-    }  @RequestMapping("/login/password-finder")
+    }  @RequestMapping("/order-inquiry-non-member1")
+    public String orderInquiryNonMember1() {
+        log.info("order inquiry nonmember1");
+        return "login/order-inquiry-non-member1";
+    }  @RequestMapping("/password-finder")
     public String passwordFinder() {
         log.info("password finder");
         return "login/password-finder";
-    }  @RequestMapping("/login/signup")
-    public String singUp() {
+    }  @RequestMapping("/signup")
+    public String signUp() {
         log.info("signup");
         return "login/signup";
-    }  @RequestMapping("/login/member-login")
+    }  @RequestMapping("/member-login")
     public String memberLogin() {
         log.info("member login");
         return "login/member-login";
     }
+
+@RequestMapping("/signup2")
+    public String signup2() {
+        log.info("signup2");
+        return "login/signup2";
+    }
+
 }

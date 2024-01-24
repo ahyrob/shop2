@@ -1,8 +1,12 @@
 package clothes.shop.service;
 
+import clothes.shop.domain.Address;
 import clothes.shop.domain.Member;
+import clothes.shop.domain.UserStatus;
 import clothes.shop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +18,9 @@ import java.util.List;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+
+
+
 
     // 회원 가입
     @Transactional //변경
@@ -29,9 +36,10 @@ public class MemberService {
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         }
     }
-    /**
-     * 전체 회원 조회
-     */
+/**
+     * 전체 회원 조회*/
+
+
     public List<Member> findMembers() {
         return memberRepository.findAll();
     }

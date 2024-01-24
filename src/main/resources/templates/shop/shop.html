@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+    <link href="/css/shopstyles.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="header">
+    <div th:replace="fragments/bodyHeader :: bodyHeader" />
+</div>
+
+<div class="product-container">
+    <div class="left-section">
+        <h2>ALL</h2>
+    </div>
+    <div class="product-box">
+        <img src="/image/top.png" alt="Product Image">
+        <div class="product-info">
+            <h3>Teddy Fur Jacket (3 color)</h3>
+            <p>117,000</p>
+            <!-- 다른 상품 정보 추가 -->
+        </div>
+    </div>
+</div>
+</body>
+</html>

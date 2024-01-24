@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Login Page</title>
+    <title>비회원 주문 조회하기</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link href="/css/loginstyles.css" rel="stylesheet">
 
@@ -10,12 +10,16 @@
 <body>
 <div class="container">
     <div th:replace="fragments/bodyHeader :: bodyHeader"/>
-    <div class="login-form">
-        <h2>약관동의</h2>
-        <form action="/login/signup" method="post">
+    <div class="order-inquiry-non-member1">
+        <h2>비회원 주문 조회</h2>
+        <form action="/login/order-inquiry-non-member1" method="post">
             <div class="form-input-group">
-                <h3>아이디</h3>
+                <h3>주문자명</h3>
                 <input type="text" name="username" class="form-input" placeholder="아이디를 입력하세요" required>
+            </div>
+            <div class="form-input-group">
+                <h3>주문번호</h3>
+                <input type="password" name="password" class="form-input" placeholder="주문번호를 입력하세요" required>
             </div>
             <div class="form-input-group">
                 <h3>비밀번호</h3>
@@ -23,8 +27,7 @@
             </div>
         </form>
 
-        <button onclick="location.href='/login/signup2'" class="form-button">다음</button>
-        <button onclick="location.href='/login/login'" class="form-button2">취소</button>
+        <button onclick="location.href='/login/order-inquiry-non-member2'" class="form-button">조회</button>
 
 
 

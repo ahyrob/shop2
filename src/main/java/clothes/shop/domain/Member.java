@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,14 +18,19 @@ public class Member {
     @Column(name = "member_id")
     private Long id;
 
-    //@NotEmpty
+    //@NotEmpty(me)
+    @Column(unique = true)
     private String loginId; // 사용자 아이디
+
+    @Column(unique = true)
     private String name;
+
     //@NotEmpty
     private String password;
     @Embedded
     private Address address;
     private String phone;
+    @Column(unique = true)
     private String email;
 
     @Enumerated(EnumType.STRING)
