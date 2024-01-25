@@ -63,4 +63,19 @@ public class MemberServiceTest {
         assertEquals(memberId, loggedMember.getId()); // memberId와 loggedMember가 같은지 확인
     }
 
+    @Test
+    public void 아이디_찾기() throws Exception {
+        //given
+        Member member = new Member();
+        member.setName("finduser");
+        member.setEmail("findemail@example.com");
+        Long memberId = memberService.join(member);
+
+        //when
+        String idFindMember = memberService.findLoginIdByNameAndEmail("finduser", "findemail@example.com");
+
+        //then
+        assertEquals(member.getLoginId(), idFindMember);
+    }
+
 }

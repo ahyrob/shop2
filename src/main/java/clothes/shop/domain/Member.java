@@ -13,6 +13,7 @@ import java.util.List;
 @Getter @Setter
 public class Member {
     // 1.
+    @Getter
     @Id
     @GeneratedValue
     @Column(name = "member_id")

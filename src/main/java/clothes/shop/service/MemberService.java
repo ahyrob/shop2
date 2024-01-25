@@ -1,11 +1,8 @@
 package clothes.shop.service;
 
-import clothes.shop.domain.Address;
 import clothes.shop.domain.Member;
-import clothes.shop.domain.UserStatus;
 import clothes.shop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,9 +33,6 @@ public class MemberService {
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         }
     }
-/**
-     * 전체 회원 조회*/
-
 
     public List<Member> findMembers() {
         return memberRepository.findAll();
@@ -64,6 +58,17 @@ public class MemberService {
             throw new IllegalStateException("존재하지 않는 회원입니다.");
         }
         return findMembers.get(0); // 중복 이름이 없다고 가정
+    }
+
+
+    public String findLoginIdByNameAndEmail(String name, String email) {
+        List<Member> members = memberRepository.findByLoginId(name, email);
+
+        if (!members.isEmpty()) {
+            return members.get(0).getLoginId();
+        } else {
+            throw new IllegalStateException("존재하지 않는 회원입니다.");
+        }
     }
 
 

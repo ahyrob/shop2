@@ -32,10 +32,9 @@ public class MemberRepository {
                 .getResultList();
     }
 
-
-    // 아이디 찾을 때 이름이랑 이메일 있어야 돼
-    public List<Member> findByNameAndEmail(String name, String email) {
-        return em.createQuery("select m from Member m where m.name = :name and m.email = :email", Member.class)
+    public List<Member> findByLoginId(String name, String email) {
+        return em.createQuery("select m from Member m where m.name = :name and m.email = :email",
+                        Member.class)
                 .setParameter("name", name)
                 .setParameter("email", email)
                 .getResultList();
