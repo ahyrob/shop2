@@ -17,9 +17,11 @@ import static org.mockito.Mockito.when;
 @Transactional
 public class MemberServiceTest {
 
-    @Autowired MemberService memberService;
+    @Autowired
+    MemberService memberService;
     @Autowired
     MemberRepository memberRepository;
+
     @Test
     public void 회원가입() throws Exception {
         //Given
@@ -30,6 +32,7 @@ public class MemberServiceTest {
         //Then
         assertEquals(member, memberRepository.findOne(saveId));
     }
+
     @Test
     public void 중복_회원_예외() throws Exception {
         //Given
@@ -48,34 +51,90 @@ public class MemberServiceTest {
     }
 
     @Test
-    public void 로그인() throws Exception{
+    public void 아이디_찾기() throws Exception {
         // Given
-        Member member = new Member();
-        member.setName("testUser");
-        member.setPassword("password123");
-        Long memberId = memberService.join(member);
-
+        Member member1 = new Member();
+        member1.setLoginId("testid");
+        member1.setEmail("test@example.com");
+        member1.setName("testname");
         // When
-        Member loggedMember = memberService.login("testUser", "password123");
+        memberService.join(member1);
 
-        // Then
-        assertNotNull(loggedMember); // loggedMember가 null이 아닌지 확인
-        assertEquals(memberId, loggedMember.getId()); // memberId와 loggedMember가 같은지 확인
+        //then
+        assertEquals(member1.getLoginId(), memberRepository.findLoginIdByNameAndEmail("testname", "test@example.com"));
     }
 
     @Test
-    public void 아이디_찾기() throws Exception {
-        //given
-        Member member = new Member();
-        member.setName("finduser");
-        member.setEmail("findemail@example.com");
-        Long memberId = memberService.join(member);
+    public void 비밀번호_변경() throws Exception {
+        // given
+        Member member1 = new Member();
+        member1.setName("pwname");
+        member1.setLoginId("pwloginid");
+        member1.setEmail("pw@example.com");
+        member1.setPassword("pw");
 
-        //when
-        String idFindMember = memberService.findLoginIdByNameAndEmail("finduser", "findemail@example.com");
+        // when
+        memberService.join(member1);
+        memberService.updatePassword("pwname", "pwloginid", "pw@example.com", "newpw");
 
         //then
-        assertEquals(member.getLoginId(), idFindMember);
+        assertTrue(member1.getPassword().equals("newpw")); // assertEquals보다 assertTrue 사용(비밀번호가 변경된 경우에만 테스트가 성공해야 하기 때문)
     }
+
+    @Test
+    public void 로그인() throws Exception {
+        // Given
+        String loginId = "testuser";
+        String password = "testpassword";
+
+        Member member = new Member();
+        member.setLoginId(loginId);
+        member.setPassword(password);
+        memberRepository.save(member);
+
+        // When
+        Member loggedMember = memberService.login(loginId, password);
+
+        // Then
+        assertNotNull(loggedMember);
+        assertEquals(loginId, loggedMember.getLoginId());
+    }
+
+    @Test
+    public void 회원정보_수정() throws Exception {
+        //given
+        Member member1 = new Member();
+        member1.setId(1L);
+        member1.setPhone("010-1234-5678");
+        member1.setEmail("update@example.com");
+
+        //when
+        memberService.updateEmailAndPhone(1L,"newupdate@example.com", "010-5678-1234");
+
+        //then
+        assertTrue(member1.getEmail().equals("newupdate@example.com"));
+        assertTrue(member1.getPhone().equals("010-5678-1234"));
+
+    }
+
+    @Test
+    public void 회원정보_수정2() throws Exception {
+        //given
+        Member member1 = new Member();
+        member1.setPhone("010-1234-5678");
+        member1.setEmail("update@example.com");
+
+        //when
+        memberService.join(member1);
+        Long memberId = member1.getId();
+        memberService.updateEmailAndPhone2("update@example.com","010-1234-5678","newupdate@example.com", "010-9874-5678" );
+
+        //then
+        Member updatedMember = memberRepository.findOne(memberId);
+        assertEquals("newupdate@example.com", updatedMember.getEmail());
+        assertEquals("010-9874-5678", updatedMember.getPhone());
+
+    }
+
 
 }

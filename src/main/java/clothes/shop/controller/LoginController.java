@@ -1,3 +1,4 @@
+/*
 package clothes.shop.controller;
 
 import clothes.shop.domain.Member;
@@ -21,10 +22,12 @@ public class LoginController {
     private final MemberService memberService;
 
     //@RequiredArgsConstructor 쓰면 @Autowired 부터 생략 가능
-   /* @Autowired // 생략 가능
+   */
+/* @Autowired // 생략 가능
     public LoginController(MemberService memberService) {
         this.memberService = memberService;
-    }*/
+    }*//*
+
 
     @RequestMapping("/login")
     public String login() {
@@ -67,11 +70,13 @@ public class LoginController {
         return "login/member-login";
     }
 
+*/
 /*@RequestMapping("/signup2")
     public String signup2() {
         log.info("signup2");
         return "login/signup2";
-    }*/
+    }*//*
+
 @RequestMapping("/signup2")
     @GetMapping("/login/signup2")
     public String showSignUpForm(Model model) {
@@ -129,3 +134,4 @@ public class LoginController {
     }
 
 
+*/

@@ -3,7 +3,6 @@ package clothes.shop.service;
 import clothes.shop.domain.Member;
 import clothes.shop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,61 +15,63 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-
-
-
-    // 회원 가입
-    @Transactional //변경
+    /**
+     * 회원 가입
+     */
+    @Transactional
     public Long join(Member member) {
+
         validateDuplicateMember(member); //중복 회원 검증
         memberRepository.save(member);
         return member.getId();
     }
+
     private void validateDuplicateMember(Member member) {
-        List<Member> findMembers =
-                memberRepository.findByName(member.getName());
+        List<Member> findMembers = memberRepository.findByName(member.getName());
         if (!findMembers.isEmpty()) {
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         }
     }
 
+    //회원 전체 조회
     public List<Member> findMembers() {
         return memberRepository.findAll();
     }
+
     public Member findOne(Long memberId) {
         return memberRepository.findOne(memberId);
     }
 
+
+    // 아이디 조회
+    public String findIdByNameAndEmail(String name, String email) {
+        return memberRepository.findLoginIdByNameAndEmail(name, email);
+    }
+
+    // 비밀번호 수정
+    @Transactional
+    public void updatePassword(String name, String loginId, String email, String newPassword) {
+
+        memberRepository.updatePassword(name, loginId, email, newPassword);
+    }
+
     // 로그인
-    public Member login(String name, String password) {
-        Member findMembers = findMemberByName(name);
-
-        if (findMembers != null && findMembers.getPassword().equals(password)) {
-            return findMembers;
-        } else {
-            throw new IllegalStateException("로그인 실패: 아이디 또는 비밀번호가 일치하지 않습니다.");
-        }
+    @Transactional
+    public Member login(String loginId, String password) {
+        return memberRepository.login(loginId, password);
     }
 
-    public Member findMemberByName(String name) {
-        List<Member> findMembers = memberRepository.findByName(name);
-        if (findMembers.isEmpty()) {
-            throw new IllegalStateException("존재하지 않는 회원입니다.");
-        }
-        return findMembers.get(0); // 중복 이름이 없다고 가정
+    // 회원 정보 수정
+    @Transactional
+    public void updateEmailAndPhone(Long memberId, String newEmail, String newPhone) {
+        memberRepository.updateEmailAndPhone(memberId,newEmail,newPhone);
     }
 
-
-    public String findLoginIdByNameAndEmail(String name, String email) {
-        List<Member> members = memberRepository.findByLoginId(name, email);
-
-        if (!members.isEmpty()) {
-            return members.get(0).getLoginId();
-        } else {
-            throw new IllegalStateException("존재하지 않는 회원입니다.");
-        }
+    // 회원 정보 수정 2
+    @Transactional
+    public void updateEmailAndPhone2(String email, String phone, String newEmail, String newPhone) {
+        memberRepository.updateEmailAndPhone2(email, phone,newEmail,newPhone);
     }
-
 
 
 }
