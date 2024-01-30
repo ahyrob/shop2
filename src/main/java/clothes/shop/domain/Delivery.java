@@ -24,4 +24,9 @@ public class Delivery {
     private Order order;
 
 
+    public void setAddress(Address address) {
+    }
+
+    public void setStatus(DeliveryStatus deliveryStatus) {
+    }
 }

@@ -7,10 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+
 
 //@RunWith(SpringRunner.class)
 @SpringBootTest
@@ -100,25 +99,9 @@ public class MemberServiceTest {
         assertEquals(loginId, loggedMember.getLoginId());
     }
 
+
     @Test
     public void 회원정보_수정() throws Exception {
-        //given
-        Member member1 = new Member();
-        member1.setId(1L);
-        member1.setPhone("010-1234-5678");
-        member1.setEmail("update@example.com");
-
-        //when
-        memberService.updateEmailAndPhone(1L,"newupdate@example.com", "010-5678-1234");
-
-        //then
-        assertTrue(member1.getEmail().equals("newupdate@example.com"));
-        assertTrue(member1.getPhone().equals("010-5678-1234"));
-
-    }
-
-    @Test
-    public void 회원정보_수정2() throws Exception {
         //given
         Member member1 = new Member();
         member1.setPhone("010-1234-5678");
@@ -127,13 +110,36 @@ public class MemberServiceTest {
         //when
         memberService.join(member1);
         Long memberId = member1.getId();
-        memberService.updateEmailAndPhone2("update@example.com","010-1234-5678","newupdate@example.com", "010-9874-5678" );
+        memberService.updateEmailAndPhone("update@example.com", "010-1234-5678", "newupdate@example.com", "010-9874-5678");
 
         //then
         Member updatedMember = memberRepository.findOne(memberId);
         assertEquals("newupdate@example.com", updatedMember.getEmail());
         assertEquals("010-9874-5678", updatedMember.getPhone());
 
+    }
+
+
+    @Test
+    public void 회원_탈퇴() throws Exception {
+        // given
+        Member member1 = new Member();
+        member1.setLoginId("delete");
+        member1.setPhone("010-1234-5678");
+        member1.setEmail("update@example.com");
+
+        // when
+        memberService.join(member1);
+        Long memberId = member1.getId();
+
+        Member existingMember = memberRepository.findOne(memberId);
+        assertNotNull(existingMember, "탈퇴 이전에는 회원이 존재");
+
+        memberService.delete(member1);
+
+        // then
+        Member deletedMember = memberRepository.findOne(memberId);
+        assertNull(deletedMember, "회원이 탈퇴되었으므로 null 반환");
     }
 
 

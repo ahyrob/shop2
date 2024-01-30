@@ -1,14 +1,12 @@
 package clothes.shop.domain;
 
+import clothes.shop.domain.item.Item;
 import jakarta.persistence.*;
 import lombok.Getter;
-import org.hibernate.annotations.Fetch;
-
-import java.util.ArrayList;
-import java.util.List;
+import lombok.Setter;
 
 @Entity
-@Getter
+@Getter @Setter
 public class OrderItem {
 
     // 1.
@@ -33,8 +31,8 @@ public class OrderItem {
     @JoinColumn(name = "item_id")
     private Item item;
 
-    //3.
 
+    //3.
 
 
 }

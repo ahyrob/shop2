@@ -1,12 +1,9 @@
 package clothes.shop.repository;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import clothes.shop.domain.Member;
-import jakarta.persistence.TypedQuery;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -86,16 +83,7 @@ public class MemberRepository {
     }
 
     // 회원 정보 수정 email, phone
-    public void updateEmailAndPhone(Long memberId, String newEmail, String newPhone) {
-        Member member = em.find(Member.class, memberId);
-        if (member != null) {
-            member.setEmail(newEmail);
-            member.setPhone(newPhone);
-            em.merge(member);
-        }
-    }
-
-    public void updateEmailAndPhone2(String email, String phone, String newEmail, String newPhone) {
+    public void updateEmailAndPhone(String email, String phone, String newEmail, String newPhone) {
         List<Member> members = em.createQuery("select m from Member m where m.email=:email and m.phone=:phone", Member.class)
                 .setParameter("email", email)
                 .setParameter("phone", phone)
@@ -108,6 +96,9 @@ public class MemberRepository {
         }
     }
 
+    public void delete(Member member) {
+        em.remove(member);
+    }
 
 
 

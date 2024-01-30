@@ -29,6 +29,7 @@ public class Member {
     //@NotEmpty
     private String password;
     @Embedded
+
     private Address address;
     private String phone;
     @Column(unique = true)

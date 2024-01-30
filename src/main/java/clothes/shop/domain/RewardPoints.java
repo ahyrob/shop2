@@ -2,12 +2,15 @@ package clothes.shop.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Getter
+@Setter
 public class RewardPoints {
     // 1.
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "reward_id")
     private Long rewardId;
     private int rewardAmount;
